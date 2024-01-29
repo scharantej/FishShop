@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fresh & Frozen Fish Market - Cart</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Fresh & Frozen Fish Market</h1>
+<nav>
+<a href="/">Home</a>
+<a href="/products">Products</a>
+<a href="/cart">Cart</a>
+<a href="/checkout">Checkout</a>
+</nav>
+</header>
+<main>
+<section>
+<h2>Your Cart</h2>
+<table class="cart">
+<thead>
+<tr>
+<th>Name</th>
+<th>Quantity</th>
+<th>Price</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+{% for cart_item in cart_items %}
+<tr>
+<td>{{ cart_item.fish_species.name }}</td>
+<td>{{ cart_item.quantity }}</td>
+<td>{{ cart_item.fish_species.price | format_currency }}</td>
+<td>
+<form action="/remove_from_cart" method="post">
+<input type="hidden" name="cart_item_id" value="{{ cart_item.id }}">
+<button type="submit">Remove</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Total Price: {{ total_price | format_currency }}</p>
+<a href="/checkout">Proceed to Checkout</a>
+</section>
+</main>
+<footer>
+<p>Copyright &copy; 2023 Fresh & Frozen Fish Market</p>
+</footer>
+</body>
+</html>
+
+
