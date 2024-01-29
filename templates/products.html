@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fresh & Frozen Fish Market - Products</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Fresh & Frozen Fish Market</h1>
+<nav>
+<a href="/">Home</a>
+<a href="/products">Products</a>
+<a href="/cart">Cart</a>
+<a href="/checkout">Checkout</a>
+</nav>
+</header>
+<main>
+<section>
+<h2>Our Products</h2>
+<table class="products">
+<thead>
+<tr>
+<th>Name</th>
+<th>Price</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+{% for fish_species in fish_species %}
+<tr>
+<td>{{ fish_species.name }}</td>
+<td>{{ fish_species.price | format_currency }}</td>
+<td>{{ fish_species.description }}</td>
+<td>
+<form action="/add_to_cart" method="post">
+<input type="hidden" name="fish_species_id" value="{{ fish_species.id }}">
+<input type="number" name="quantity" value="1" min="1">
+<button type="submit">Add to Cart</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</section>
+</main>
+<footer>
+<p>Copyright &copy; 2023 Fresh & Frozen Fish Market</p>
+</footer>
+</body>
+</html>
+
+
